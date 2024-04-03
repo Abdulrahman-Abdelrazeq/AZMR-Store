@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="all.min.css">
+</head>
+<body>
+    <div class="login-register">
+        <form action="congratulation.html">
+            <div class="image">
+                <a href="store.html" style="text-decoration: none;">
+                    <img src="image/Galaxy_store_logo.png" alt="">
+                    <h1>AZMR Store</h1>
+                </a>
+            </div>
+            <div class="buttons">
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+            </div>
+            <input id="nameRegister" type="text" name="name" placeholder="Enter Your Name" required>
+            <input id="emailRegister" type="email" name="mail" placeholder="Enter Your Email" required>
+            <div class="emailRegistered" style="margin-top: -10px; visibility: hidden; color: red;">
+                This email is already registered !
+            </div>
+            <input class="passwordRegister" type="password" name="firstPassword" placeholder="Enter Your Password" required>
+            <input class="passwordRegister" type="password" name="lastPassword" placeholder="Repeat Your Password" required>
+            <p>I'm 
+                <select name="user">
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </p>
+            <div class="error-input input">
+                <div class="icon">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+                Correct name !
+            </div>
+            <div class="error-input input">
+                <div class="icon">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+                Correct email !
+            </div>
+            <div class="error-input input">
+                <div class="icon">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+                Matching password !
+            </div>
+            <div class="error-input input">
+                <div class="icon">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+                The password must be 8 or more !
+            </div>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <style>
+        .login-register form .buttons a:first-child {
+            box-shadow: 0 0 5px white inset;
+            filter: blur(1px);
+        }
+    </style>
+    <script src="register.js"></script>
+</body>
+</html>

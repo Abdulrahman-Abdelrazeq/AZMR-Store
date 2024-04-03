@@ -1,0 +1,711 @@
+/* Start Global */
+:root {
+    --main-color: #FFC107;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--main-color);
+}
+.container {
+    width: 1200px;
+    margin: auto;
+}
+/* End Global */
+/* Start Header */
+header {
+    background-image: linear-gradient(to right, black, rgb(91, 86, 58) 80%);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+header .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+header .container .logo{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: var(--main-color);
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 35px;
+}
+header .container .logo img{
+    width: 36px;
+    filter: brightness(1.9);
+}
+header .container .search {
+    width: 230px;
+    position: relative;
+}
+header .container .search img {
+    width: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    pointer-events: none;
+}
+header .container .search input {
+    height: 35px;
+    border-radius: 18px;
+    width: 80px;
+    padding-left: 30px;
+    font-size: 17px;
+    transition: 0.3s;
+}
+header .container .search input:focus {
+    outline: none;
+    width: 230px;
+}
+header .container ul{
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    text-transform: uppercase;
+}
+header .container ul > li:nth-child(2) {
+    padding: 20px 30px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+}
+header .container ul > li:nth-child(2)::before {
+    content: "";
+    border-style: solid;
+    border-width: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.1s;
+}
+header .container ul > li:nth-child(2).open::before {
+    border-color: transparent transparent white transparent;
+    bottom: 8px;
+}
+header .container ul > li:nth-child(2).close::before {
+    border-color: white transparent transparent transparent;
+    bottom: 0px;
+}
+header .container ul li a{
+    color: white;
+    display: inline-block;
+    padding: 20px 5px;
+    text-decoration: none;
+    transition: color 0.3s;
+    width: 100%;
+}
+header .container ul li a.active {
+    color: var(--main-color);
+}
+header .container ul > li:nth-child(2):hover,
+header .container ul li a:hover {
+    color: var(--main-color);
+}
+header .container ul > li ol {
+    list-style: none;
+    position: absolute;
+    background-color: #3a3725;
+    top: 58px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+header .container ul > li ol li {
+    border-top: 1px solid white;
+}
+header .container ul .info {
+    padding: 11px 0;
+    text-transform: none;
+    color: #eee;
+    cursor: text;
+    font-size: 15px;
+}
+header .container ul .display-none {
+    display: none;
+}
+header .container ul li i {
+    margin-left: 10px;
+}
+header .container ul > li {
+    cursor: pointer;
+}
+
+header .container ul .crud-button,
+header .container ul .crud-button-users {
+    position: fixed;
+    left: -55px;
+    top: 126px;
+    background-color: #5b563a;
+    color: white;
+    border-radius: 0 50% 50% 0;
+    transition: 0.3s;
+    display: none;
+}
+header .container ul .crud-button-users{
+    top: 200px;
+    left: -60px;
+}
+header .container ul .crud-button:hover,
+header .container ul .crud-button-users:hover {
+    left: 0;
+}
+header .container ul .crud-button a,
+header .container ul .crud-button-users a {
+    border-radius: 0 50% 50% 0;
+    padding: 20px 15px 20px 5px;
+}
+
+header .container ul .cart {
+    position: absolute;
+    left: 0;
+    bottom: -64px;
+    background-color: #5b563a;
+    border-radius: 0 0 50% 50%;
+}
+header .container ul .cart a {
+    border-radius: 0 0 50% 50%;
+    padding: 15px 8px;
+}
+header .container ul .cart span {
+    position: absolute;
+    left: 0px;
+    top: 45px;
+    background-color: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+}
+/* End Header */
+/* Start Cart */
+article {
+    margin: auto;
+    width: 1200px;
+    padding-top: 60px;
+    text-align: center;
+}
+article h1 {
+    margin-bottom: 25px;
+    font-size: 35px;
+}
+article .cart {
+    background-color: #eee;
+    padding: 30px 50px;
+}
+article .cart .info {
+    color: #777;
+}
+article .cart > div {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #bebebe;
+    padding: 15px 0;
+}
+article .cart div div {
+    flex: 1;
+}
+article .cart div.name {
+    flex: 3;
+}
+article .cart div.quantity {
+    flex: 2;
+}
+article .cart .product img {
+    width: 110px;
+    max-height: 110px;
+}
+article .cart .product span {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #bebebe;
+}
+article .cart .product span.count {
+    margin: 0 5px;
+}
+article .cart .product span:not(:nth-child(2)):hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+}
+article .cart .product .quantity span:first-child {
+    background-color: var(--main-color);
+    color: white;
+}
+article .cart .product .quantity span:last-child {
+    background-color: #ddd;
+}
+body > div.Continue {
+    margin: auto;
+    width: 1200px;
+    padding: 0 50px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eee;
+    margin-bottom: 80px;
+}
+body > div.Continue h3:first-child {
+    cursor: pointer;
+    padding: 20px 30px;
+    background-color: var(--main-color);
+    color: white;
+}
+body > div.Continue h3:first-child:hover {
+    filter: brightness(1.1);
+}
+body > div.Continue h3:last-child {
+    border: 1px solid #bebebe;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 251px;
+}
+/* End Cart */
+/* Start Main */
+main {
+    margin: auto;
+    padding: 100px 0;
+    width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    min-height: 40vh;
+}
+main section {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+main section figure {
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+main section img {
+    width: 350px;
+    height: 350px;
+    transition: 1s;
+}
+main section img:hover {
+    transform: scale(1.3) rotate(10deg);
+    filter: brightness(0.7);
+}
+main section h4 {
+    margin: 15px 0;
+    color: var(--main-color);
+    height: 57px;
+    width: 100%;
+}
+main section > p {
+    line-height: 1.6;
+    font-size: 14px;
+    color: #ddd;
+}
+main section div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+}
+main section div:not(:last-child) {
+    border-bottom: 1px solid #777;
+}
+main section > div:last-child {
+    padding-bottom: 0;
+}
+main section div p {
+    font-size: 14px;
+}
+main section button {
+    padding: 5px 20px;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 0 0 0 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+main section div div {
+    font-size: 25px;
+    color: var(--main-color);
+    padding: 0;
+    width: fit-content;
+}
+/* End Main */
+/* Start Footer */
+footer {
+    background-color: black;
+}
+footer .container{
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 0;
+}
+footer .container .icons-logo h1{
+    color: var(--main-color);
+    margin-bottom: 50px;
+    font-size: 35px;
+}
+footer .container .icons-logo .icons{
+    display: flex;
+    justify-content: space-between;
+}
+footer .container .icons-logo .icons a{
+    color: white;
+}
+footer .container .icons-logo .icons a:hover {
+    color: var(--main-color);
+}
+footer .container div h2{
+    color: var(--main-color);
+    margin-bottom: 35px;
+}
+footer .container div h4{
+    margin-bottom: 25px;
+}
+footer .container div a{
+    color: #ddd;
+    text-decoration: none;
+}
+footer .container div a:hover {
+    color: white;
+}
+footer .container .mail h3{
+    display: flex;
+    gap: 20px;
+    color: white;
+    margin-bottom: 80px;
+}
+footer .container .mail input{
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    margin-bottom: 25px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-bottom: 2px solid #777;
+}
+footer .container .mail input:focus {
+    outline: none;
+}
+footer .container .mail input::placeholder {
+    transition: 0.3s;
+}
+footer .container .mail input:focus::placeholder {
+    opacity: 0;
+}
+footer .container .mail button{
+    width: 50%;
+    padding: 15px 0;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: var(--main-color);
+    color: rgb(232, 232, 232);
+    border: none;
+    cursor: pointer;
+}
+footer .container .mail button:hover {
+    color: white;
+}
+footer .container .mail p {
+    margin: -20px 0 30px;;
+}
+footer .container .mail .errorToContact {
+    color: red;
+
+}
+footer .container .mail .correctToContact {
+    color: var(--main-color);
+
+}
+
+/* End Footer */
+
+/* Start Login and Register*/
+.login-register {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-register form {
+    background-color: black;
+    padding: 80px 25px 60px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 0 40px black;
+    margin: 50px 0;
+}
+.login-register form .image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.login-register form .image img {
+    filter: brightness(1.9);
+    width: 100px;
+    margin-bottom: 5px;
+}
+.login-register form .image h1 {
+    color: var(--main-color);
+}
+.login-register form .buttons{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+}
+.login-register form .buttons a {
+    width: 50%;
+    text-align: center;
+    padding: 15px 0;
+    background-color: black;
+    text-decoration: none;
+    color: #ddd;
+}
+.login-register form .buttons a:first-child{
+    border-radius: 15px 0 0 0;
+}
+.login-register form .buttons a:last-child{
+    border-radius: 0 15px 0 0;
+}
+.login-register form .buttons a:hover {
+    filter: none;
+    color: white;
+}
+.login-register form input:not([type = "submit"]){
+    margin-bottom: 30px;
+    display: block;
+    width: 200px;
+    padding: 15px 4px;
+    border: none;
+    border-bottom: 2px solid #777;
+    background-color: transparent !important;
+    color: white !important;
+    transition: width 0.3s;
+}
+.login-register form input:not([type = "submit"]):focus {
+    width: 400px;
+    outline: none;
+}
+.login-register form input:not([type = "submit"])::placeholder {
+    transition: 0.3s;
+}
+.login-register form input:not([type = "submit"]):focus::placeholder {
+    opacity: 0;
+}
+.login-register form p:first-of-type {
+    font-weight: bold;
+    color: var(--main-color);
+}
+.login-register form p select{
+    width: 50%;
+    padding: 10px;
+    cursor: pointer;
+}
+.login-register form input[type = "submit"] {
+    padding: 15px;
+    width: 400px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+    cursor: pointer;
+    background-color: var(--main-color);
+    color: #e7e7e7;
+}
+.login-register form input[type = "submit"]:hover {
+    color: white;
+}
+.login-register .input {
+    margin-top: 10px;
+    transition: 0.7s;
+}
+.login-register .error-input {
+    color: red;
+}
+.login-register .correct-input {
+    color: green;
+}
+.login-register .input .icon {
+    display: inline;
+}
+.invaild-password-email {
+    color: red;
+    visibility: hidden;
+}
+/* End Login and Register*/
+
+/* Start Congratulation */
+.Congratulation {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.Congratulation img {
+    width: 150px;
+}
+.Congratulation h1 {
+    font-size: 45px;
+    margin-top: 15px;
+    color: white;
+}
+.Congratulation p {
+    margin-top: 20px;
+    font-size: 25px;
+}
+/* End Congratulation */
+
+/* Start about */
+div.about .image img {
+    width: 100%;
+}
+div.about .info-about {
+    background-color: #eee;
+    margin-top: -5px;
+    padding: 60px 0;
+}
+div.about .info-about h1 {
+    text-align: center;
+    color: var(--main-color);
+    margin-bottom: 30px;
+}
+div.about .info-about p {
+    margin: auto;
+    width: 1200px;
+    line-height: 2;
+}
+div.about .info-about p:first-of-type {
+    margin-bottom: 30px;
+}
+/* End about */
+
+/* Start Crud Product */
+.crud-products {
+    margin: auto;
+    width: 1200px;
+    padding: 100px 0;
+}
+.crud-products h1 {
+    text-align: center;
+    margin: 60px 0;
+    font-size: 40px;
+}
+.crud-products .crud {
+    background-color: white;
+    padding: 40px 0;
+    border-radius: 15px;
+}
+.crud-products table {
+    width: 90%;
+    margin: auto;
+}
+.crud-products table tr th:nth-child(1) {
+    width: 5%;
+} 
+.crud-products table tr th:nth-child(2) {
+    width: 35%;
+} 
+.crud-products table tr th:nth-child(3) {
+    width: 10%;
+} 
+.crud-products table tr th:nth-child(5) {
+    width: 20%;
+} 
+.crud-products table th {
+    padding: 10px;
+}
+.crud-products table td {
+    padding: 20px;
+    text-align: center;
+}
+.crud-products table td span {
+    color: white;
+    padding: 10px 25px;
+    border-radius: 6px;
+    opacity: .5;
+    cursor: pointer;
+}
+.crud-products table td span:hover {
+    opacity: 1;
+}
+.crud-products table td span.active {
+    opacity: 1;
+}
+.crud-products table td span:first-child {
+    background-color: #F44336;
+}
+.crud-products table td span:last-child {
+    background-color: var(--main-color);
+    margin-left: 5px;
+}
+/* End Crud Product */
+
+/* Start Crud Users */
+.crud-users {
+    margin: auto;
+    width: 1200px;
+    padding: 100px 0;
+}
+.crud-users h1 {
+    text-align: center;
+    margin: 60px 0;
+    font-size: 40px;
+}
+.crud-users .crud {
+    background-color: white;
+    padding: 40px 0;
+    border-radius: 15px;
+}
+.crud-users table {
+    width: 90%;
+    margin: auto;
+}
+.crud-users table tr th:first-child {
+    width: 30%;
+} 
+.crud-users table tr th:last-child {
+    width: 20%;
+} 
+.crud-users table th {
+    padding: 10px;
+}
+.crud-users table td {
+    padding: 20px;
+    text-align: center;
+}
+.crud-users table td span {
+    color: white;
+    padding: 10px 25px;
+    border-radius: 6px;
+    opacity: .5;
+    cursor: pointer;
+    background-color: #F44336;
+}
+.crud-users table td span:hover {
+    opacity: 1;
+}
+.crud-users table td span.active {
+    opacity: 1;
+}
+/* End Crud Users */

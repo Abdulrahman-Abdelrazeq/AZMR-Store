@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="image/Galaxy_store_logo.png" alt="">
+                AZMR STORE
+            </div>
+            <div class="search">
+                <img src="image/search-icon-png-21.png" alt="">
+                <input type="text" id="search">
+            </div>
+            <ul>
+                <li><a href="store.html">Home</a></li>
+                <li class="close">
+                    Categories
+                    <ol>
+                        <li><a href="men.html">Men's Closing</a></li>
+                        <li><a href="women.html">Women's Closing</a></li>
+                        <li><a href="jewelery.html">Jewelery</a></li>
+                        <li><a href="electronics.html">Electronics</a></li>
+                    </ol>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li>
+                    <div class="info">
+                        <h4></h4>
+                        <p></p>
+                    </div>
+                </li>
+                <li id="logOut" class="display-none"><a>Log Out<i class="fa-solid fa-right-from-bracket"></i></a></li>
+                <li class="crud-button-users"><a href="users.html">Users<i class="fa-solid fa-user fa-fade"></i></a></li>
+                <li class="crud-button"><a href="crudProducts.html">Crud<i class="fa-solid fa-gear fa-spin"></i></a></li>
+                <li class="cart">
+                    <a href="cart.html" class="active"><i class="fa-solid fa-cart-shopping fa-beat-fade" style="display: block;"></i>Cart</a>
+                    <span>0</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <article>
+        <h1>My Shopping Cart</h1>
+        <div class="cart">
+            <div class="info">
+                <div>Picture</div>
+                <div class="name">Name</div>
+                <div class="quantity">Quantity</div>
+                <div>Remove</div>
+                <div>Price</div>
+                <div>Total</div>
+            </div>
+        </div>
+    </article>
+    <div class="Continue">
+        <h3>Continue Shopping</h3>
+        <h3>
+            Total
+            <span class="total-price">$<span></span></span>
+        </h3>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="icons-logo">
+                <h1>AZMR STORE</h1>
+                <div class="icons">
+                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/?hl=en"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://twitter.com/"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="support">
+                <h2>Support</h2>
+                <h4><a href="about.html">Contact Us</a></h4>
+                <h4><a href="cart.html">Product Registration</a></h4>
+                <h4><a href="about.html">FAQ</a></h4>
+            </div>
+            <div class="store">
+                <h2>AZMR STORE</h2>
+                <h4><a href="store.html">Home</a></h4>
+                <h4><a href="men.html">Men's Closing</a></h4>
+                <h4><a href="women.html">Women's Closing</a></h4>
+                <h4><a href="jewelery.html">Jewelery</a></h4>
+                <h4><a href="electronics.html">Electronics</a></h4>
+                <h4><a href="about.html">About Us</a></h4>
+            </div>
+            <div class="mail">
+                <h3><i class="fa-solid fa-envelope"></i> Stay up to date on the latest from AZMR Store</h3>
+                <input type="email" placeholder="Enter your e-mail address">
+                <p class="error-input">invaild email !</p>
+                <button>Sign Up</button>
+            </div>
+        </div>
+    </footer>
+    <style></style>
+    <script src="main.js"></script>
+    <script>
+        // Add products from localstorage cart
+        let prdcts = JSON.parse(localStorage.getItem("productsCart"))
+        for(let i = 0; i < prdcts.length; i++) {
+            let product = document.createElement("div")
+            product.className = "product"
+
+            let image = document.createElement("div")
+            let img = document.createElement("img")
+            img.src = prdcts[i].image
+            image.appendChild(img)
+
+            let name = document.createElement("div")
+            name.className = "name"
+            name.innerHTML = prdcts[i].title
+
+            let quantity = document.createElement("div")
+            quantity.className = "quantity"
+            let span1 = document.createElement("span")
+            span1.className = "plus"
+            span1.innerHTML = "+"
+            let span2 = document.createElement("span")
+            span2.className = "count"
+            span2.innerHTML = "1"
+            let span3 = document.createElement("span")
+            span3.className = "minus"
+            span3.innerHTML = "-"
+            quantity.appendChild(span1)
+            quantity.appendChild(span2)
+            quantity.appendChild(span3)
+
+            let remove = document.createElement("div")
+            let spanRemove = document.createElement("span")
+            spanRemove.className = "remove"
+            spanRemove.id = prdcts[i].id
+            spanRemove.innerHTML = "x"
+            remove.appendChild(spanRemove)
+
+            let price = document.createElement("div")
+            price.className = "price"
+            price.innerHTML = prdcts[i].price
+
+            let total = document.createElement("div")
+            total.className = "total"
+            total.innerHTML = prdcts[i].price
+
+            product.appendChild(image)
+            product.appendChild(name)
+            product.appendChild(quantity)
+            product.appendChild(remove)
+            product.appendChild(price)
+            product.appendChild(total)
+            let cart = document.querySelector("article .cart")
+            cart.appendChild(product)
+        }
+        // Count price of products
+        let pluses = document.querySelectorAll("article .cart .product span.plus")
+        let minuses = document.querySelectorAll("article .cart .product span.minus")
+        let counts = document.querySelectorAll("article .cart .product span.count")
+        let prices = document.querySelectorAll("article .cart .product .price")
+        let totals = document.querySelectorAll("article .cart .product .total")
+        let totalsAll = document.querySelector("div h3 .total-price span")
+
+        // Count Total price
+        let firstResult = 0
+        for(let t = 0; t < totals.length; t++) {
+            firstResult += parseFloat(totals[t].innerHTML)
+        }
+        totalsAll.innerHTML = firstResult.toFixed(2)
+        // Count price of products
+        for(let i = 0; i < pluses.length; i++) {
+            pluses[i].onclick = function () {
+                counts[i].innerHTML++
+                totals[i].innerHTML = (parseFloat(totals[i].innerHTML) + parseFloat(prices[i].innerHTML)).toFixed(2)
+                // Count Total price
+                let lastResult = 0
+                for(let t = 0; t < totals.length; t++) {
+                lastResult += parseFloat(totals[t].innerHTML)
+                }
+                totalsAll.innerHTML = lastResult.toFixed(2)
+            }
+
+            minuses[i].onclick = function () {
+                if(counts[i].innerHTML != "0") {
+                    counts[i].innerHTML--
+                    totals[i].innerHTML = (parseFloat(totals[i].innerHTML) - parseFloat(prices[i].innerHTML)).toFixed(2)
+                }
+                // Count Total price
+                let lastResult = 0
+                for(let t = 0; t < totals.length; t++) {
+                lastResult += parseFloat(totals[t].innerHTML)
+                }
+                totalsAll.innerHTML = lastResult.toFixed(2)
+            }
+        }
+
+        // remove product from cart list
+        let removeProduct = document.querySelectorAll("article .cart .product span.remove")
+        for(let r = 0; r < removeProduct.length; r++) {
+            removeProduct[r].onclick = function () {
+                let arr = []
+                let prdctCart = JSON.parse(localStorage.getItem("productsCart"))
+                for(let p = 0; p < prdctCart.length; p++) {
+                    if (prdctCart[p].id != removeProduct[r].id) {
+                        arr.push(prdctCart[p])
+                    }
+                }
+                localStorage.setItem("productsCart", JSON.stringify(arr))
+                window.location.reload()
+            }
+        }
+    </script>
+</body>
+</html>

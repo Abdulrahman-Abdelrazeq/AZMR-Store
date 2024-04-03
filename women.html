@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="image/Galaxy_store_logo.png" alt="">
+                AZMR STORE
+            </div>
+            <div class="search">
+                <img src="image/search-icon-png-21.png" alt="">
+                <input type="text" id="search">
+            </div>
+            <ul>
+                <li><a href="store.html">Home</a></li>
+                <li class="close">
+                    Categories
+                    <ol>
+                        <li><a href="men.html">Men's Closing</a></li>
+                        <li><a href="women.html" class="active">Women's Closing</a></li>
+                        <li><a href="jewelery.html">Jewelery</a></li>
+                        <li><a href="electronics.html">Electronics</a></li>
+                    </ol>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li>
+                    <div class="info">
+                        <h4></h4>
+                        <p></p>
+                    </div>
+                </li>
+                <li id="logOut" class="display-none"><a>Log Out<i class="fa-solid fa-right-from-bracket"></i></a></li>
+                <li class="crud-button-users"><a href="users.html">Users<i class="fa-solid fa-user fa-fade"></i></a></li>
+                <li class="crud-button"><a href="crudProducts.html">Crud<i class="fa-solid fa-gear fa-spin"></i></a></li>
+                <li class="cart">
+                    <a href="cart.html"><i class="fa-solid fa-cart-shopping fa-beat-fade" style="display: block;"></i>Cart</a>
+                    <span>0</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+
+    </main>
+    <footer>
+        <div class="container">
+            <div class="icons-logo">
+                <h1>AZMR STORE</h1>
+                <div class="icons">
+                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/?hl=en"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://twitter.com/"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="support">
+                <h2>Support</h2>
+                <h4><a href="about.html">Contact Us</a></h4>
+                <h4><a href="cart.html">Product Registration</a></h4>
+                <h4><a href="about.html">FAQ</a></h4>
+            </div>
+            <div class="store">
+                <h2>AZMR STORE</h2>
+                <h4><a href="store.html">Home</a></h4>
+                <h4><a href="men.html">Men's Closing</a></h4>
+                <h4><a href="women.html">Women's Closing</a></h4>
+                <h4><a href="jewelery.html">Jewelery</a></h4>
+                <h4><a href="electronics.html">Electronics</a></h4>
+                <h4><a href="about.html">About Us</a></h4>
+            </div>
+            <div class="mail">
+                <h3><i class="fa-solid fa-envelope"></i> Stay up to date on the latest from AZMR Store</h3>
+                <input type="email" placeholder="Enter your e-mail address">
+                <p class="error-input">invaild email !</p>
+                <button>Sign Up</button>
+            </div>
+        </div>
+    </footer>
+    <style>
+
+    </style>
+    <script src="main.js"></script>
+    <script>
+        let prdctsEdit = JSON.parse(localStorage.getItem("prdctsEdit"))
+        for(let i = 0; i < prdctsEdit.length; i++) {
+            if(prdctsEdit[i].category == "women's clothing") {
+                let section = document.createElement("section")
+                let image = document.createElement("figure")
+                let img = document.createElement("img")
+                img.src = prdctsEdit[i].image
+                image.appendChild(img)
+                let h4 = document.createElement("h4")
+                h4.innerHTML = prdctsEdit[i].title
+                let p = document.createElement("p")
+                p.innerHTML = prdctsEdit[i].description
+
+                let divId = document.createElement("div")
+                let id = document.createElement("p")
+                id.innerHTML = "id"
+                let idValue = document.createElement("p")
+                idValue.innerHTML = prdctsEdit[i].id
+                divId.appendChild(id)
+                divId.appendChild(idValue)
+
+                let divCategory = document.createElement("div")
+                let category = document.createElement("p")
+                category.innerHTML = "category"
+                let categoryValue = document.createElement("p")
+                categoryValue.innerHTML = prdctsEdit[i].category
+                divCategory.appendChild(category)
+                divCategory.appendChild(categoryValue)
+
+                let divCount = document.createElement("div")
+                let count = document.createElement("p")
+                count.innerHTML = "stock quantity"
+                let countValue = document.createElement("p")
+                countValue.innerHTML = prdctsEdit[i].rating.count
+                divCount.appendChild(count)
+                divCount.appendChild(countValue)
+
+                let divRate = document.createElement("div")
+                let rates = document.createElement("p")
+                rates.innerHTML = "rate"
+                let ratesValue = document.createElement("p")
+                ratesValue.innerHTML = prdctsEdit[i].rating.rate
+                divRate.appendChild(rates)
+                divRate.appendChild(ratesValue)
+
+                let divPrice = document.createElement("div")
+                let button = document.createElement("button")
+                button.innerHTML = "Add To Cart"
+                button.id = prdctsEdit[i].id
+                let priceValue = document.createElement("div")
+                priceValue.innerHTML = prdctsEdit[i].price
+                divPrice.appendChild(button)
+                divPrice.appendChild(priceValue)
+
+                section.appendChild(image)
+                section.appendChild(h4)
+                section.appendChild(p)
+                section.appendChild(divId)
+                section.appendChild(divCategory)
+                section.appendChild(divCount)
+                section.appendChild(divRate)
+                section.appendChild(divPrice)
+                let mainsections = document.querySelector("main")
+                mainsections.appendChild(section)
+            }
+    }
+    </script>
+</body>
+</html>

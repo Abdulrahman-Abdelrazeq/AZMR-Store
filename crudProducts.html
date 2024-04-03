@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="image/Galaxy_store_logo.png" alt="">
+                AZMR STORE
+            </div>
+            <div class="search">
+                <img src="image/search-icon-png-21.png" alt="">
+                <input type="text" id="search">
+            </div>
+            <ul>
+                <li><a href="store.html">Home</a></li>
+                <li class="close">
+                    Categories
+                    <ol>
+                        <li><a href="men.html">Men's Closing</a></li>
+                        <li><a href="women.html">Women's Closing</a></li>
+                        <li><a href="jewelery.html">Jewelery</a></li>
+                        <li><a href="electronics.html">Electronics</a></li>
+                    </ol>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li>
+                    <div class="info">
+                        <h4></h4>
+                        <p></p>
+                    </div>
+                </li>
+                <li id="logOut" class="display-none"><a>Log Out<i class="fa-solid fa-right-from-bracket"></i></a></li>
+                <li class="crud-button-users"><a href="users.html">Users<i class="fa-solid fa-user fa-fade"></i></a></li>
+                <li class="crud-button"><a href="crudProducts.html" class="active">Crud<i class="fa-solid fa-gear fa-spin"></i></a></li>
+                <li class="cart">
+                    <a href="cart.html"><i class="fa-solid fa-cart-shopping fa-beat-fade" style="display: block;"></i>Cart</a>
+                    <span>0</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="crud-products">
+        <h1>Crud Products</h1>
+        <div class="crud">
+            <table border="1" cellSpacing="0">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="icons-logo">
+                <h1>AZMR STORE</h1>
+                <div class="icons">
+                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/?hl=en"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://twitter.com/"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="support">
+                <h2>Support</h2>
+                <h4><a href="about.html">Contact Us</a></h4>
+                <h4><a href="cart.html">Product Registration</a></h4>
+                <h4><a href="about.html">FAQ</a></h4>
+            </div>
+            <div class="store">
+                <h2>AZMR STORE</h2>
+                <h4><a href="store.html">Home</a></h4>
+                <h4><a href="men.html">Men's Closing</a></h4>
+                <h4><a href="women.html">Women's Closing</a></h4>
+                <h4><a href="jewelery.html">Jewelery</a></h4>
+                <h4><a href="electronics.html">Electronics</a></h4>
+                <h4><a href="about.html">About Us</a></h4>
+            </div>
+            <div class="mail">
+                <h3><i class="fa-solid fa-envelope"></i> Stay up to date on the latest from AZMR Store</h3>
+                <input id="emailToContact" type="email" placeholder="Enter your e-mail address">
+                <p>invaild email !</p>
+                <p id="lastMessage">Thank you, we will contact you soon</p>
+                <button id="buttonToContact">Sign Up</button>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        let crudProducts = document.querySelector(".crud-products .crud table")
+        let prdcts = JSON.parse(localStorage.getItem("products"))
+        for(let i = 0; i < prdcts.length; i++) {
+            let row = document.createElement("tr")
+            let idProduct = document.createElement("td")
+            idProduct.innerHTML = prdcts[i].id
+            let nameProduct = document.createElement("td")
+            nameProduct.innerHTML = prdcts[i].title
+            let priceProduct = document.createElement("td")
+            priceProduct.innerHTML = prdcts[i].price
+            let categoryProduct = document.createElement("td")
+            categoryProduct.innerHTML = prdcts[i].category
+            let action = document.createElement("td")
+            let deleteProduct = document.createElement("span")
+            deleteProduct.innerHTML = "Delete"
+            deleteProduct.id = prdcts[i].id  + "delete"
+            action.appendChild(deleteProduct)
+            let showProduct = document.createElement("span")
+            showProduct.innerHTML = "Show"
+            showProduct.id = prdcts[i].id + "show"
+            action.appendChild(showProduct)
+
+
+            row.appendChild(idProduct)
+            row.appendChild(nameProduct)
+            row.appendChild(priceProduct)
+            row.appendChild(categoryProduct)
+            row.appendChild(action)
+            crudProducts.appendChild(row)
+        }
+        let deleteProduct = document.querySelectorAll(".crud-products table td span:first-child")
+        let showProduct = document.querySelectorAll(".crud-products table td span:last-child")
+
+        for(let i = 0; i < deleteProduct.length; i++){
+            let prdctEdit = localStorage.getItem("prdctsEdit")
+            if(prdctEdit) {
+                for(let e = 0; e < JSON.parse(prdctEdit).length; e++) {
+                    console.log(JSON.parse(prdctEdit)[e].id)
+                    console.log(5)
+                    if(parseInt(deleteProduct[i].id) === JSON.parse(prdctEdit)[e].id) {
+
+                        showProduct[i].classList.add("active")
+                        deleteProduct[i].classList.remove("active")
+                        e = deleteProduct.length
+                    } else{
+                        showProduct[i].classList.remove("active")
+                        deleteProduct[i].classList.add("active")
+                    }
+                }
+            }
+
+            deleteProduct[i].onclick = function () {
+                this.className = "active"
+                showProduct[i].className = ""
+                let arr = []
+                for(let p = 0; p < prdcts.length; p++) {
+                    if(prdcts[p].id != parseInt(deleteProduct[i].id) && !deleteProduct[p].classList.contains("active")) {
+                        arr.push(prdcts[p])
+                    }
+                }
+                localStorage.setItem("prdctsEdit", JSON.stringify(arr))
+            }
+            showProduct[i].onclick = function () {
+                this.className = "active"
+                deleteProduct[i].className = ""
+                let arr = []
+                for(let p = 0; p < prdcts.length; p++) {
+                    if(showProduct[p].classList.contains("active")) {
+                        arr.push(prdcts[p])
+                    }
+                }
+                localStorage.setItem("prdctsEdit", JSON.stringify(arr))
+            }
+        }
+
+
+    </script>
+</body>
+</html>
